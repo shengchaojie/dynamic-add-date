@@ -196,11 +196,11 @@ public class AddDateInterceptor implements Interceptor {
         String camelCaseUpdateDateProperty = StringUtil.camelCase(updateDateColumnName);
         while (it.hasNext()) {
             ParameterMapping pm = it.next();
-            if (pm.getProperty().equals(camelCaseCreateDateProperty)) {
+            if (pm.getProperty().equals(camelCaseCreateDateProperty)|| (pm.getProperty().startsWith("__frch_") &&pm.getProperty().endsWith(camelCaseCreateDateProperty))) {
                 log.debug("原始Sql语句已包含自动添加的列: {}", createDateColumnName);
                 it.remove();
             }
-            if (pm.getProperty().equals(camelCaseUpdateDateProperty)) {
+            if (pm.getProperty().equals(camelCaseUpdateDateProperty)|| (pm.getProperty().startsWith("__frch_") &&pm.getProperty().endsWith(camelCaseUpdateDateProperty))) {
                 log.debug("原始Sql语句已包含自动添加的列: {}", updateDateColumnName);
                 it.remove();
             }
